@@ -1,0 +1,91 @@
+{
+  "name": "SlipStream",
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
+  "api": {
+    "baseUrl": "https://api.oneslipstream.com/v1"
+  },
+  "favicon": "/favicon.png",
+  "colors": {
+    "primary": "#f8175f",
+    "light": "#f8175f",
+    "dark": "#612246",
+    "anchors": { "from": "#F81660", "to": "#2724BE" }
+  },
+  "topbarCtaButton": {
+    "name": "Request Access",
+    "url": "https://calendly.com/dillon/expedited-access?back=1&month=2023-03"
+  },
+  "topbarLinks": [
+    {
+      "name": "Dashboard",
+      "url": "https://portal.oneslipstream.com/business/login"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "Changelog",
+      "icon": "megaphone",
+      "url": "changelog"
+    },
+    {
+      "name": "Contact",
+      "icon": "envelope",
+      "url": "mailto:dev@oneslipstream.com"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Introduction",
+      "pages": ["overview"]
+    },
+    {
+      "group": "Slipstream API",
+      "pages": [
+        {
+          "group": "Consumer",
+          "pages": [
+            "consumer/create",
+            "consumer/retrieves",
+            "consumer/updates",
+            "consumer/deletes"
+          ]
+        },
+        {
+          "group": "Search",
+          "pages": ["search/create", "search/retrieves"]
+        },
+        {
+          "group": "Consumer Account",
+          "pages": [
+            "consumer-account/create",
+            "consumer-account/list",
+            "consumer-account/retrieves"
+          ]
+        },
+        {
+          "group": "Account Event",
+          "pages": [
+            "account-event/creates",
+            "account-event/list",
+            "account-event/retrieves"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Changelog",
+      "pages": ["changelog/overview"]
+    }
+  ],
+  "footerSocials": {
+    "twitter": "https://twitter.com/OneSlipstream",
+    "linkedin": "https://www.linkedin.com/search/results/all/?fetchDeterministicClustersOnly=false&heroEntityKey=urn%3Ali%3Aorganization%3A76131847&keywords=slipstream&origin=RICH_QUERY_TYPEAHEAD_HISTORY&position=0&searchId=c3cd0049-0a1f-404d-ad7f-d42f1dae071f&sid=rQW",
+    "website": "https://oneslipstream.com/"
+  },
+  "modeToggle": {
+    "default": "dark"
+  }
+}
