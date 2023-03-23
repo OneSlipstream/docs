@@ -54,6 +54,12 @@
       ]
     },
     {
+      "group": "Working with the API",
+      "pages": [
+        "pages/api-explained/authentication"
+      ]
+    },
+    {
       "group": "Slipstream API",
       "pages": [
         {
