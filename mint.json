@@ -5,8 +5,7 @@
     "dark": "/logo/dark.svg"
   },
   "api": {
-    "baseUrl": "https://api.oneslipstream.com/v1",
-    "hidePlayground": true
+    "baseUrl": "https://api.oneslipstream.com/v1"
   },
   "favicon": "/favicon.png",
   "colors": {
