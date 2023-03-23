@@ -83,6 +83,6 @@
   },
   "modeToggle": {
     "default": "dark",
-    "isHiddenDefault": true
+    "isHiddenDefault": false
   }
 }
