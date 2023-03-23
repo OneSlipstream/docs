@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
-  title: Slipstream API
-  description: This is the slipstream API.
+  title: API
+  description: The slipstream rest API
   termsOfService: https://oneslipstream.com/terms/
   contact:
     email: dev@oneslipstream.com
