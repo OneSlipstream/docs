@@ -16,7 +16,10 @@
     "primary": "#D19F64",
     "light": "#D19F64",
     "dark": "#D19F64",
-    "anchors": { "from": "#8E8C87", "to": "#D19F64" },
+    "anchors": {
+      "from": "#8E8C87",
+      "to": "#D19F64"
+    },
     "background": {
       "dark": "#161616"
     }
@@ -35,7 +38,7 @@
     {
       "name": "Changelog",
       "icon": "megaphone",
-      "url": "changelog"
+      "url": "pages/changelog"
     },
     {
       "name": "Contact",
@@ -46,7 +49,9 @@
   "navigation": [
     {
       "group": "Introduction",
-      "pages": ["overview"]
+      "pages": [
+        "overview"
+      ]
     },
     {
       "group": "Slipstream API",
@@ -54,21 +59,25 @@
         {
           "group": "Consumer",
           "pages": [
-            "consumers/create",
-            "consumers/retrieves",
-            "consumers/updates",
-            "consumers/deletes"
+            "pages/api/consumers/create",
+            "pages/api/consumers/retrieves",
+            "pages/api/consumers/updates",
+            "pages/api/consumers/deletes"
           ]
         },
         {
           "group": "Search",
-          "pages": ["searches/create"]
+          "pages": [
+            "pages/api/searches/create"
+          ]
         }
       ]
     },
     {
       "group": "Changelog",
-      "pages": ["changelog/overview"]
+      "pages": [
+        "pages/changelog/overview"
+      ]
     }
   ],
   "footerSocials": {
