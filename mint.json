@@ -47,31 +47,15 @@
         {
           "group": "Consumer",
           "pages": [
-            "consumer/create",
-            "consumer/retrieves",
-            "consumer/updates",
-            "consumer/deletes"
+            "consumers/create",
+            "consumers/retrieves",
+            "consumers/updates",
+            "consumers/deletes"
           ]
         },
         {
           "group": "Search",
-          "pages": ["search/create", "search/retrieves"]
-        },
-        {
-          "group": "Consumer Account",
-          "pages": [
-            "consumer-account/create",
-            "consumer-account/list",
-            "consumer-account/retrieves"
-          ]
-        },
-        {
-          "group": "Account Event",
-          "pages": [
-            "account-event/creates",
-            "account-event/list",
-            "account-event/retrieves"
-          ]
+          "pages": ["searches/create"]
         }
       ]
     },
