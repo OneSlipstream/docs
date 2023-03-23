@@ -16,7 +16,7 @@
     "primary": "#D19F64",
     "light": "#D19F64",
     "dark": "#D19F64",
-    "anchors": { "from": "#F81660", "to": "#2724BE" }
+    "anchors": { "from": "#8E8C87", "to": "#D19F64" }
   },
   "topbarCtaButton": {
     "name": "Request Access",
