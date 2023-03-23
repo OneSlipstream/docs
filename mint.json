@@ -1,8 +1,8 @@
 {
   "name": "SlipStream",
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/public/logo/light.svg",
+    "dark": "/public/logo/dark.svg"
   },
   "api": {
     "baseUrl": "https://api.oneslipstream.com/v1",
@@ -11,7 +11,7 @@
       "inputPrefix": "sk_"
     }
   },
-  "favicon": "/favicon.png",
+  "favicon": "/public/favicon.png",
   "colors": {
     "primary": "#D19F64",
     "light": "#D19F64",
