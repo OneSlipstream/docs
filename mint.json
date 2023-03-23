@@ -45,13 +45,8 @@
     {
       "group": "Introduction",
       "pages": [
-        "pages/overview"
-      ]
-    },
-    {
-      "group": "Working with the API",
-      "pages": [
-        "pages/api-explained/authentication"
+        "pages/overview",
+        "pages/introduction/authentication"
       ]
     },
     {
