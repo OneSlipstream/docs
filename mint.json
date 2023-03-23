@@ -46,7 +46,8 @@
       "group": "Introduction",
       "pages": [
         "pages/overview",
-        "pages/introduction/authentication"
+        "pages/introduction/authentication",
+        "pages/introduction/errors"
       ]
     },
     {
