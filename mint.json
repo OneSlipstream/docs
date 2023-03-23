@@ -21,7 +21,7 @@
   "topbarLinks": [
     {
       "name": "Dashboard",
-      "url": "https://portal.oneslipstream.com/business/login"
+      "url": "https://dashboard.oneslipstream.com/"
     }
   ],
   "anchors": [
