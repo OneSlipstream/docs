@@ -11,6 +11,7 @@
       "inputPrefix": "sk_"
     }
   },
+  "backgroundImage": "/background.png",
   "favicon": "/favicon.png",
   "colors": {
     "primary": "#f8175f",
