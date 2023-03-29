@@ -1,0 +1,88 @@
+---
+sidebarTitle: "Metadata"
+title: "Metadata"
+---
+
+Most objects such as [consumers](/pages/api/consumers/create) have a `metadata` parameter, which is a key/value store that can be used to store additional information about the object.
+
+You can specify up to **50 keys**, with key names up to 40 characters long and values up to 500 characters long. All **keys must be unique** and **values must be strings**.
+
+This metadata can be used to store additional structured information about the object. This is useful for storing information that is not part of the object itself, but is useful for your application.
+
+Some objects also have a `description` parameter, which is a string that can be used to store a description of the object.
+
+<RequestExample>
+```javascript
+var axios = require("axios").default;
+
+var options = {
+  method: 'POST',
+  url: 'https://api.oneslipstream.com/v1/consumers',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer sk_test_***'
+  },
+  data: {
+    title: 'mr',
+    firstname: 'Ernst',
+  othername: 'Stavro',
+    lastname: 'Blofeld',
+    metadata: {
+      role: 'CEO',
+      internalReference: 'c1'
+    },
+    dob: '1973-05-28',
+    description: 'The CEO of Spectre Loans',
+    addresses: [
+      {
+        buildingNumber: '70',
+        line1: 'Ravenhurst Gardens',
+        city: 'London',
+        state: 'Greater London',
+        postcode: 'w1j 7eg',
+        country: 'gb'
+      }
+    ]
+  }
+};
+
+axios.request(options).then(function (response) {
+  console.log(response.data);
+}).catch(function (error) {
+  console.error(error);
+});
+```
+</RequestExample>
+
+<ResponseExample>
+```json
+{
+  "id": "con_MTYzOTk1MzE5MTUyNDM1MjAx",
+  "title": "mr",
+  "firstname": "Ernst",
+  "othername": "Stavro",
+  "lastname": "Blofeld",
+  "dob": "1973-05-28T00:00:00.000Z",
+  "description": "The CEO of Spectre Loans",
+  "metadata": {
+    "role": "CEO",
+    "internalReference": "c1"
+  },
+  "addresses": [{
+    "id": "addr_MTYzOTk1MzE5MTUyNDM1MjAy",
+    "buildingName": null,
+    "buildingNumber": "70",
+    "subBuildingName": null,
+    "subBuildingNumber": null,
+    "line1": "Ravenhurst Gardens",
+    "line2": null,
+    "city": "London",
+    "state": "Greater London",
+    "postcode": "w1j 7eg",
+    "country": "gb",
+    "createdAt": "2023-03-29T12:58:51.120Z"
+  }],
+  "createdAt": "2023-03-29T12:58:51.120Z"
+}
+```
+</ResponseExample>
