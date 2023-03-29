@@ -48,7 +48,8 @@
         "pages/overview",
         "pages/introduction/authentication",
         "pages/introduction/errors",
-        "pages/introduction/metadata"
+        "pages/introduction/metadata",
+        "pages/introduction/pagination"
       ]
     },
     {

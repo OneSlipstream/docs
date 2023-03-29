@@ -1,0 +1,44 @@
+---
+sidebarTitle: "Pagination"
+title: "Pagination"
+---
+
+All endpoints that list support pagination.
+
+We utilize cursor based pagination via `startingAfter` and `endingBefore` parameters. 
+Both parameters accept ID's of a given object (e.g.: [Consumer](/pages/api/consumers/create)) 
+and return objects in inverse chronological order meaning the most recently created objects will be returned first.
+
+The `startingAfter` and `endingBefore` parameters are mutually exclusive and cannot be set at the same time.
+
+Additionally, you can set the `limit` parameter to limit the number of objects returned. The default limit is 10 and the maximum is 100.
+
+Lastly, the response will include a `hasMore` field that indicates if there are more objects to be iterated over.
+
+
+<RequestExample>
+```bash cURL
+curl --request GET \
+  --url https://api.oneslipstream.com/v1/consumers?limit=2 \
+  --header "Authorization: Bearer sk_test_***" 
+```
+</RequestExample>
+
+<ResponseExample>
+```json
+{
+  "consumers": [{
+    "id": "con_MTYzOTk1MzE5MTUyNDM1MjAx",
+    "title": "mr",
+    "firstname": "Ernst",
+    //...
+  },{
+    "id": "con_MTYzNjIwODg0MTQ2ODM5NTUz",
+    "title": "miss",
+    "firstname": "Eve",
+    //...
+  }],
+  "hasMore": true
+}
+```
+</ResponseExample>
