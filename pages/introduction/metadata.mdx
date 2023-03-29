@@ -12,45 +12,31 @@ This metadata can be used to store additional structured information about the o
 Some objects also have a `description` parameter, which is a string that can be used to store a description of the object.
 
 <RequestExample>
-```javascript
-var axios = require("axios").default;
-
-var options = {
-  method: 'POST',
-  url: 'https://api.oneslipstream.com/v1/consumers',
-  headers: {
-    'Content-Type': 'application/json',
-    Authorization: 'Bearer sk_test_***'
-  },
-  data: {
-    title: 'mr',
-    firstname: 'Ernst',
-  othername: 'Stavro',
-    lastname: 'Blofeld',
-    metadata: {
-      role: 'CEO',
-      internalReference: 'c1'
+```bash cURL
+curl --request POST \
+  --url https://api.oneslipstream.com/v1/consumers \
+  --header "Authorization: Bearer sk_test_***" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "title": "mr",
+    "firstname": "Ernst",
+    "othername": "Stavro",
+    "lastname": "Blofeld",
+    "metadata": {
+      "role": "CEO",
+      "internalReference": "c1"
     },
-    dob: '1973-05-28',
-    description: 'The CEO of Spectre Loans',
-    addresses: [
-      {
-        buildingNumber: '70',
-        line1: 'Ravenhurst Gardens',
-        city: 'London',
-        state: 'Greater London',
-        postcode: 'w1j 7eg',
-        country: 'gb'
-      }
-    ]
-  }
-};
-
-axios.request(options).then(function (response) {
-  console.log(response.data);
-}).catch(function (error) {
-  console.error(error);
-});
+    "dob": "1973-05-28",
+    "description": "The CEO of Spectre Loans",
+    "addresses": [{
+      "buildingNumber": "70",
+      "line1": "Ravenhurst Gardens",
+      "city": "London",
+      "state": "Greater London",
+      "postcode": "w1j 7eg",
+      "country": "gb"
+  }]
+}'
 ```
 </RequestExample>
 
