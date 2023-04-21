@@ -65,6 +65,15 @@
           ]
         },
         {
+          "group": "Address",
+          "pages": [
+            "pages/api/addresses/create",
+            "pages/api/addresses/retrieve",
+            "pages/api/addresses/update",
+            "pages/api/addresses/delete"
+          ]
+        },
+        {
           "group": "Search",
           "pages": [
             "pages/api/searches/create"
