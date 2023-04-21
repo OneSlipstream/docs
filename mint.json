@@ -59,9 +59,9 @@
           "group": "Consumer",
           "pages": [
             "pages/api/consumers/create",
-            "pages/api/consumers/retrieves",
-            "pages/api/consumers/updates",
-            "pages/api/consumers/deletes"
+            "pages/api/consumers/retrieve",
+            "pages/api/consumers/update",
+            "pages/api/consumers/delete"
           ]
         },
         {
