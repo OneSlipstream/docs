@@ -18,6 +18,9 @@ tags:
   - name: Consumer
   - name: Address
   - name: Search
+  - name: Portfolio
+  - name: Account
+  - name: Account Event
 paths:
   /consumers:
     post:
@@ -203,14 +206,71 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/index_schema'
+              $ref: '#/components/schemas/search_schema'
       responses:
         '200':
           description: A consumer object
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/index_safe'
+                $ref: '#/components/schemas/search_safe'
+  /portfolios:
+    post:
+      summary: Create an portfolio
+      description: Creates a portfolio
+      tags:
+        - Portfolio
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/portfolio_schema'
+      responses:
+        '200':
+          description: An account object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/portfolio_safe'
+  /accounts:
+    post:
+      summary: Create an account
+      description: Creates an account
+      tags:
+        - Account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/account_schema'
+      responses:
+        '200':
+          description: An account object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account_safe'
+  /account_events:
+    post:
+      summary: Create an event
+      description: Creates an account event
+      tags:
+        - Account Event
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/account_event_schema'
+      responses:
+        '200':
+          description: An account event object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account_event_safe'
 components:
   schemas:
     consumer:
@@ -218,7 +278,13 @@ components:
     address:
       $ref: '#/components/schemas/address_safe'
     search:
-      $ref: '#/components/schemas/index_safe'
+      $ref: '#/components/schemas/search_safe'
+    portfolio:
+      $ref: '#/components/schemas/portfolio_safe'
+    account:
+      $ref: '#/components/schemas/account_safe'
+    account_event:
+      $ref: '#/components/schemas/account_event_safe'
     base:
       type: object
       properties:
@@ -392,7 +458,7 @@ components:
               format: date-time
               example: '2022-01-01T00:00:00.000Z'
               description: The date and time the address was created
-    index_schema:
+    search_schema:
       type: object
       properties:
         consumer:
@@ -430,7 +496,7 @@ components:
       type: string
       format: date-time
       example: '1975-07-26T00:00:00.000Z'
-    payment-status:
+    payment_status:
       type: string
       enum:
         - no_update_received
@@ -674,7 +740,7 @@ components:
                   type: object
                   properties:
                     last12m:
-                      $ref: '#/components/schemas/payment-status'
+                      $ref: '#/components/schemas/payment_status'
                       description: |
                         The worst payment status for any account in the last 12 months
                           * `no_update_received` - No update received
@@ -688,7 +754,7 @@ components:
                           * `six_pae` - Account in arrears by six or more PAE
                           * `default` - Account is in Default
                     last36m:
-                      $ref: '#/components/schemas/payment-status'
+                      $ref: '#/components/schemas/payment_status'
                       description: |
                         The worst payment status for any account in the last 36 months
                           * `no_update_received` - No update received
@@ -823,7 +889,7 @@ components:
         - notices
         - summaryAddress
         - share
-    supplier-code:
+    supplier_code:
       type: string
       enum:
         - agricultural_finance
@@ -891,7 +957,7 @@ components:
           * `telecommunications_supplier` - Telecommunications Supplier
           * `utility` - Utility
           * `vehicle_rental` - Vehicle Rental
-    account-holder-status:
+    account_holder_status:
       type: string
       enum:
         - deceased
@@ -907,7 +973,7 @@ components:
       format: date-time
       nullable: true
       example: '1975-07-26T00:00:00.000Z'
-    account-status:
+    account_status:
       type: string
       enum:
         - early_delinquency
@@ -965,7 +1031,7 @@ components:
           * `voluntary_arrangement` - Voluntary arrangement
           * `voluntary_repossession` - Voluntary repossession
           * `voluntary_termination` - Voluntary termination
-    share-account-status:
+    share_account_status:
       type: string
       enum:
         - default
@@ -993,7 +1059,7 @@ components:
           * `GBP` - Great British Pound
           * `USD` - United States Dollar
       example: GBP
-    account-code:
+    account_code:
       type: string
       enum:
         - asset_discounting
@@ -1257,7 +1323,7 @@ components:
           * `standby_credit` - Standby Credit
           * `zero_finance_loan` - Zero Finance Loan
           * `hundered_plus_ltv_mortgage` - 100% + LTV Mortgage
-    group-code:
+    group_code:
       type: string
       enum:
         - loan_and_installment_credit
@@ -1283,7 +1349,7 @@ components:
           * `miscellaneous` - Miscellaneous
           * `insurance` - Insurance
           * `home_credit` - Home Credit
-    frequency-code:
+    frequency_code:
       type: string
       enum:
         - annually
@@ -1309,7 +1375,7 @@ components:
           * `single_payment` - Single Payment
           * `weekly` - Weekly
           * `unknown` - Unknown
-    account:
+    search_account:
       type: object
       properties:
         supplier:
@@ -1321,7 +1387,7 @@ components:
               example: Slipstream
               description: The supplier name for the account
             code:
-              $ref: '#/components/schemas/supplier-code'
+              $ref: '#/components/schemas/supplier_code'
               nullable: true
         holder:
           type: object
@@ -1348,7 +1414,7 @@ components:
                 - type: object
                 - nullable: true
             status:
-              $ref: '#/components/schemas/account-holder-status'
+              $ref: '#/components/schemas/account_holder_status'
             startedAt:
               $ref: '#/components/schemas/optional'
               description: The date when account holder first appeared on the account
@@ -1428,9 +1494,9 @@ components:
                 example: 1000
                 description: The payment amount to the nearest unit e.g. 1000 = £1,000
               accountStatus:
-                $ref: '#/components/schemas/account-status'
+                $ref: '#/components/schemas/account_status'
               paymentStatus:
-                $ref: '#/components/schemas/payment-status'
+                $ref: '#/components/schemas/payment_status'
               recordedAt:
                 $ref: '#/components/schemas/optional'
                 description: The year and month of the history record
@@ -1458,7 +1524,7 @@ components:
               example: true
               description: Whether the account is a joint account
             status:
-              $ref: '#/components/schemas/share-account-status'
+              $ref: '#/components/schemas/share_account_status'
             currency:
               $ref: '#/components/schemas/currency'
             balanceAmount:
@@ -1528,10 +1594,10 @@ components:
               type: object
               properties:
                 code:
-                  $ref: '#/components/schemas/account-code'
+                  $ref: '#/components/schemas/account_code'
                   nullable: true
                 groupCode:
-                  $ref: '#/components/schemas/group-code'
+                  $ref: '#/components/schemas/group_code'
                   nullable: true
                 startedAt:
                   $ref: '#/components/schemas/optional'
@@ -1549,7 +1615,7 @@ components:
                   example: 12
                   description: The number of months for the repayment period
                 frequency:
-                  $ref: '#/components/schemas/frequency-code'
+                  $ref: '#/components/schemas/frequency_code'
               required:
                 - frequencyCode
             behavioural:
@@ -1587,7 +1653,7 @@ components:
         - holder
         - history
         - details
-    index_safe:
+    search_safe:
       type: object
       properties:
         match:
@@ -1645,7 +1711,7 @@ components:
         accounts:
           type: array
           items:
-            $ref: '#/components/schemas/account'
+            $ref: '#/components/schemas/search_account'
         scores:
           type: object
           properties:
@@ -1665,6 +1731,513 @@ components:
         - match
         - summary
         - accounts
+    portfolio_schema:
+      type: object
+      properties:
+        name:
+          type: string
+          example: My Portfolio
+          description: The name of the portfolio, this is for your reference only.
+        reference:
+          type: string
+          example: 123456789
+          description: The reference of the portfolio, this is issued by the credit bureau.
+        description:
+          type: string
+          example: My Portfolio Description
+          description: The description of the portfolio, this is for your reference only.
+        overdraftCutOff:
+          type: integer
+          example: 1000
+          nullable: true
+          description: The maximum overdraft amount for the portfolio before it's reported to the credit bureau. Defaults to 0.
+        metadata:
+          type: object
+          description: Set of key-value pairs that you can attach to an object, useful for storing additional information about the object in a structured format
+          example:
+            internalId: '12345'
+          additionalProperties:
+            type: string
+      required:
+        - name
+        - reference
+    portfolio_id:
+      type: string
+      example: port_bPKKB3sYsukFanSsaBcMCMR2
+      description: The unique identifier for the portfolio
+    portfolio_safe:
+      allOf:
+        - properties:
+            id:
+              $ref: '#/components/schemas/portfolio_id'
+          required:
+            - id
+        - $ref: '#/components/schemas/portfolio_schema'
+        - properties:
+            createdAt:
+              type: string
+              format: date-time
+              example: '2022-01-01T00:00:00.000Z'
+              description: The date and time the portfolio was created
+    consumer_account_product:
+      type: string
+      enum:
+        - hire_purchase
+        - unsecured_loan
+        - mortgage
+        - revolving_credit
+        - credit_card
+        - charge_card
+        - rental
+        - mail_order
+        - current_account
+        - second_mortgage
+        - credit_sale
+        - communications
+        - buy_now_pay_later
+        - variable_hire_purchase
+        - utility
+        - finance_lease
+        - operating_lease
+        - bounced_cheque
+        - flexible_mortgage
+        - consildated_debt
+        - combined_credit
+        - payday_loan
+        - balloon_hired_purchase
+        - residential_mortgage
+        - buy_to_let_mortgage
+        - excess_ltv_mortgage
+        - offset_current_mortgage
+        - offset_investment_mortgage
+        - shared_mortgage
+        - liability_guarantee
+        - store_card
+        - multi_function_card
+        - water
+        - gas
+        - electricity
+        - oil
+        - duel_fuel
+        - fuel_card
+        - house_insurance
+        - car_insurance
+        - life_insurance
+        - health_insurance
+        - card_protection
+        - mortgage_protection
+        - payment_protection
+        - mobile
+        - fixed_line
+        - cable
+        - satellite
+        - business_line
+        - broadband
+        - multi_communications
+        - student_loan
+        - home_credit
+        - education
+        - unsecured_mortgage_loan
+        - gambling
+        - bank_account
+      example: finance_lease
+      description: |
+        The type of product that the account is associated with.
+          * `hire_purchase` - The product remains the property of the lender until all repayments have been made.
+          * `unsecured_loan` - A fixed amount loan that is not secured against any asset.
+          * `mortgage` - A loan secured against a property by a mortgage deed.
+          * `revolving_credit` - A credit facility that allows the customer to borrow up to a pre-agreed limit and repay the amount borrowed at any time.
+          * `credit_card` - A credit facility that allows the customer to spend up to a pre-agreed limit and repay at any time.
+          * `charge_card` - A credit facility that allows the customer to spend up to a pre-agreed limit but repay the full amount at the end of each month.
+          * `rental` - A product that a customer makes regular payments to use but the underlying asset remains the property of the lender.
+          * `mail_order` - For all types of mail order portfolios.
+          * `current_account` - A bank account that allows the customer to make payments in and out of the account.
+          * `second_mortgage` - A loan secured against a property but the security ranks after the primary mortgage.
+          * `credit_sale` - The ownership of the goods is transferred to the customer immediately on signing the agreement.
+          * `communications` - For goods/service provided by a communication service provider (e.g. mobile phone, broadband, etc.).
+          * `buy_now_pay_later` - For goods/services where the first payment is deferred for an agreed period.
+          * `variable_hire_purchase` - For goods/services where the monthly payment can vary depeding on the base rate.
+          * `utility` - For goods/services provided by a utility provider (e.g. water, gas, electricity, etc.).
+          * `finance_lease` - A product where lender is not at risk since the payments cover the cost of the asset plus charges.
+          * `operating_lease` - A product where the customer pays less than 90% of the cost of the asset, and the lender carries some of the risk.
+          * `bounced_cheque` - For companies that provide cheque guarantee services.
+          * `flexible_mortgage` - A loan secured against a property by a mortgage deed where the terms are flexible. This also includes combined products i.e. a mortgage with a current account.
+          * `consolidated_debt` - When a customer has multiple loans that are transferred to another CAIS member for the purpose of debt recovery.
+          * `combined_credit` - An account with multiple credit facilities.
+          * `payday_loan` - A short term loan that is repaid on the customer's next payday, no more than 31 days after the loan is taken out.
+          * `balloon_hired_purchase` - A product where the customer makes regular payments and a finaly repayment at which point the ownership of the asset transfers to the customer.
+          * `residential_mortgage` - A loan secured against a property by a mortgage deed where the property is the customer's main residence.
+          * `buy_to_let_mortgage` - A loan secured against a property by a mortgage deed where the property is not occupied by the customer.
+          * `excess_ltv_mortgage` - A loan secured against a property by a mortgage deed where the loan to value ratio is greater than 100%.
+          * `offset_current_mortgage` - A loan secured against a property by a mortgage deed where the customer's current account offsets the interest charged.
+          * `offset_investment_mortgage` - A loan secured against a property by a mortgage deed where the customer's investment account offsets the interest charged.
+          * `shared_mortgage` - A loan secured against a property by a mortgage deed where the ownership is shared by multiple parties.
+          * `liability_guarantee` - A product where there is a pontential liability to the consumer.
+          * `store_card` - A credit facility that allows the customer to spend up to a pre-agreed limit and repay at any time. These are issued for use at specific retailers or groups.
+          * `multi_function_card` - A card with multiple functions (e.g. credit, debit, charge, etc.).
+          * `water` - For goods/services provided by a water provider.
+          * `gas` - For goods/services provided by a gas provider.
+          * `electricity` - For goods/services provided by an electricity provider.
+          * `oil` - For goods/services provided by an oil provider.
+          * `dual_fuel` - For goods/services provided by a dual fuel provider.
+          * `fuel_card` - For goods/services issued via a card. This excludes motoring fuel cards.
+          * `home_insurance` - For products provided by a house insurance provider.
+          * `car_insurance` - For products provided by a car insurance provider.
+          * `life_insurance` - For products provided by a life insurance provider.
+          * `health_insurance` - For products provided by a health insurance provider.
+          * `card_protection` - For payment protection services on cards.
+          * `mortgage_protection` - For payment protection services on mortgages.
+          * `payment_protection` - For general payment protection services.
+          * `mobile` - For goods/services provided by a mobile phone provider.
+          * `fixed_line` - For goods/services provided by a fixed line provider.
+          * `cable` - For goods/services provided by a cable provider.
+          * `satellite` - For goods/services provided by a satellite provider.
+          * `business_line` - For goods/services provided by a business line provider.
+          * `broadband` - For goods/services provided by a broadband provider.
+          * `multi_communications` - For muliple goods/services provided by a communications provider (e.g. mobile, fixed line, broadband, etc.).
+          * `student_loan` - For education loans provided under the terms of legislation, usually controlled by the Department for Education used by the student loan company.
+          * `home_credit` - For flexible credit products where payments are collected from the customer's home.
+          * `education` - For education products.
+          * `unsecured_mortgage_loan` - For loans secured against a property by a mortgage deed but there is an unsecured element e.g. A mortgage with a ratio of 100% LTV and a 10% unsecured element.
+          * `gambling` - For gambling products (e.g. spread betting, etc.).
+          * `bank_account` - A bank account that allows the customer to make payments in and out of the account, however no overdraft facility is available.
+    account_repayment_frequency:
+      type: string
+      enum:
+        - weekly
+        - fortnightly
+        - monthly
+        - quarterly
+        - annually
+        - periodically
+      example: monthly
+    consumer_account_flag:
+      type: string
+      enum:
+        - deceased
+        - partially_settled
+        - not_settled
+        - debt_assigned_non_member
+        - debt_assigned
+        - gone_away
+        - recoursed
+        - voluntary_termination
+        - arranged
+        - managed_debt_program
+        - third_party_paid
+        - account_queried
+      example: partially_settled
+    consumer_airtime_flag:
+      type: string
+      enum:
+        - live
+        - disconnected
+        - barred
+      example: live
+    consumer_account_status:
+      type: string
+      enum:
+        - unclassified
+        - dormant
+        - up_to_date
+        - one_month_late
+        - two_months_late
+        - three_months_late
+        - four_months_late
+        - five_months_late
+        - six_months_late
+        - defaulted
+      example: up_to_date
+    account_schema:
+      type: object
+      properties:
+        consumer:
+          $ref: '#/components/schemas/id'
+        portfolio:
+          $ref: '#/components/schemas/portfolio_id'
+        reference:
+          type: string
+          maxLength: 30
+          example: null
+          description: The account reference number if this customer has previously been reported otherwise leave this blank
+        product:
+          $ref: '#/components/schemas/consumer_account_product'
+        description:
+          type: string
+          nullable: true
+          maxLength: 255
+          example: null
+          description: A description of the account, this is only visible to you and is not sent to the credit bureaus
+        limitAmount:
+          type: number
+          format: int32
+          example: 500000
+          description: The starting credit limit for the account, this is only applicable to certain account types.
+        balanceAmount:
+          type: number
+          format: int32
+          example: 500000
+          description: The starting balance for the account.
+        payment:
+          type: object
+          properties:
+            amount:
+              type: number
+              format: int32
+              example: 10000
+              description: The amount that is due each month for this account.
+            minimumAmount:
+              type: number
+              format: int32
+              example: 100
+              description: The minimum amount that is due each month for this account.
+            frequency:
+              $ref: '#/components/schemas/account_repayment_frequency'
+          required:
+            - amount
+            - frequency
+        flags:
+          type: object
+          properties:
+            consumer:
+              $ref: '#/components/schemas/consumer_account_flag'
+            airtime:
+              $ref: '#/components/schemas/consumer_airtime_flag'
+              nullable: true
+              example: null
+          required:
+            - consumer
+        status:
+          $ref: '#/components/schemas/consumer_account_status'
+        jointPriority:
+          type: number
+          format: int32
+          example: 0
+          description: The priority of this account of all the holders of this account, this is only applicable to joint accounts. If the priority is 0 then this account is the primary account.
+        metadata:
+          type: object
+          description: Set of key-value pairs that you can attach to an object, useful for storing additional information about the object in a structured format
+          example:
+            internalId: '12345'
+          additionalProperties:
+            type: string
+        endAt:
+          type: string
+          format: date-time
+          nullable: true
+          example: '2024-01-01T00:00:00.000Z'
+          description: The date and time the account is due to be closed
+      required:
+        - consumer
+        - portfolio
+        - product
+        - balanceAmount
+        - payment
+        - flags
+        - status
+    account_id:
+      type: string
+      example: acc_bPKKB3sYsukFanSsaBcMCMR2
+      description: The unique identifier for the account
+    account_safe:
+      allOf:
+        - properties:
+            id:
+              $ref: '#/components/schemas/account_id'
+          required:
+            - id
+        - $ref: '#/components/schemas/account_schema'
+        - properties:
+            createdAt:
+              type: string
+              format: date-time
+              example: '2022-01-01T00:00:00.000Z'
+              description: The date and time the account was created
+    event_type:
+      type: string
+      enum:
+        - payment
+        - flag
+        - cash_advance
+        - default
+        - close
+        - limit
+        - update
+      example: payment
+    payment_event_status:
+      type: string
+      enum:
+        - success
+        - insufficient_funds
+        - processing_error
+      example: insufficient_funds
+      description: |
+        The status of the payment event
+          * `success` - The payment was successful
+          * `insufficient_funds` - The payment failed because there were insufficient funds in the account
+          * `processing_error` - The payment failed because of a processing error (e.g. the card issuer declined the payment)
+    payment:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: int32
+          example: 50000
+          description: The payment amount to the nearest unit e.g. 50000 = £500.00
+        status:
+          $ref: '#/components/schemas/payment_event_status'
+          nullable: true
+          example: success
+          description: The status of the payment event.
+    flag:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/consumer_account_flag'
+          nullable: true
+          example: null
+          description: The status of the consumer account.
+    cash_advance:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: int32
+          example: 50000
+          description: The amount to the nearest unit e.g. 50000 = £500.00
+    default_event_status:
+      type: string
+      enum:
+        - defaulted
+        - resolved
+      example: defaulted
+      description: |
+        The status of the payment event
+          * `defaulted` - The customer has defaulted on the payment
+          * `resolved` - The customer has resolved the default on the payment
+    default:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/default_event_status'
+          nullable: true
+          example: null
+          description: The status of the default.
+    close_event_reason:
+      type: string
+      enum:
+        - paid
+      example: paid
+    close:
+      type: object
+      properties:
+        reason:
+          $ref: '#/components/schemas/close_event_reason'
+          nullable: true
+          example: null
+          description: The reason for closing the account.
+    limit:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: int32
+          example: 50000
+          description: The payment amount to the nearest unit e.g. 50000 = £500.00
+        action:
+          type: string
+          enum:
+            - increase
+            - set
+            - decrease
+          example: increase
+    account_update:
+      type: object
+      properties:
+        isCollection:
+          type: boolean
+          nullable: true
+          example: null
+          description: Whether the account is now in a collection status.
+        isConsolidatingDebt:
+          type: boolean
+          nullable: true
+          example: null
+          description: Whether the account is now in a consolidating debt status.
+        isPromotional:
+          type: boolean
+          nullable: true
+          example: false
+          description: Whether the account is now in a promotional status.
+    account_event_schema:
+      type: object
+      properties:
+        account:
+          $ref: '#/components/schemas/account_id'
+        eventType:
+          $ref: '#/components/schemas/event_type'
+        payment:
+          $ref: '#/components/schemas/payment'
+        flag:
+          $ref: '#/components/schemas/flag'
+        cashAdvance:
+          $ref: '#/components/schemas/cash_advance'
+        default:
+          $ref: '#/components/schemas/default'
+        close:
+          $ref: '#/components/schemas/close'
+        limit:
+          $ref: '#/components/schemas/limit'
+        update:
+          $ref: '#/components/schemas/account_update'
+      required:
+        - account
+        - eventType
+    account_event_id:
+      type: string
+      example: acc_evt_bPKKB3sYsukFanSsaBcMCMR2
+      description: The unique identifier for the account event
+    amount:
+      type: number
+      format: int32
+      example: 50000
+      description: The payment amount to the nearest unit e.g. 50000 = £500.00
+    account_event_safe:
+      allOf:
+        - properties:
+            id:
+              $ref: '#/components/schemas/account_event_id'
+            account:
+              $ref: '#/components/schemas/account_id'
+              example: acc_bPKKB3sYsukFanSsaBcMCMR2
+            payment:
+              $ref: '#/components/schemas/payment'
+            flag:
+              $ref: '#/components/schemas/flag'
+            cashAdvance:
+              $ref: '#/components/schemas/cash_advance'
+            default:
+              $ref: '#/components/schemas/default'
+            close:
+              $ref: '#/components/schemas/close'
+            limit:
+              properties:
+                amount:
+                  $ref: '#/components/schemas/amount'
+            update:
+              $ref: '#/components/schemas/account_update'
+            eventType:
+              $ref: '#/components/schemas/event_type'
+          required:
+            - id
+            - account
+            - eventType
+        - properties:
+            createdAt:
+              type: string
+              format: date-time
+              example: '2022-01-01T00:00:00.000Z'
+              description: The date and time the account event was created
   securitySchemes:
     bearerAuth:
       type: http
