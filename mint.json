@@ -78,6 +78,24 @@
           "pages": [
             "pages/api/searches/create"
           ]
+        },
+        {
+          "group": "Portfolio",
+          "pages": [
+            "pages/api/portfolios/create"
+          ]
+        },
+        {
+          "group": "Account",
+          "pages": [
+            "pages/api/accounts/create"
+          ]
+        },
+        {
+          "group": "Account Events",
+          "pages": [
+            "pages/api/account_events/create"
+          ]
         }
       ]
     },
