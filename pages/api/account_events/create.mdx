@@ -1,0 +1,24 @@
+---
+openapi: "POST /account_events"
+---
+
+Account events are used to track changes to accounts e.g. when the credit limit changes.
+
+The `eventType` field is used to indicate the type of event and the data that is included in the event.
+
+E.g. To update the credit limit the `eventType` would be `limit` and the `limit` field would contain the new credit limit.
+
+<ResponseExample>
+```json
+{
+  "id": "acc_evt_bPKKB3sYsukFanSsaBcMCMR2",
+  "eventType": "payment",
+  "payment": {
+    "amount": 50000,
+    "status": "success"
+  },
+  "createdAt": "2022-01-01T00:00:00.000Z"
+}
+```
+</ResponseExample>
+
