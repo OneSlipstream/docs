@@ -1409,10 +1409,8 @@ components:
               nullable: true
               description: The account holder's date of birth
             address:
-              allOf:
-                - $ref: '#/components/schemas/address_safe'
-                - type: object
-                - nullable: true
+              $ref: '#/components/schemas/address_safe'
+              nullable: true
             status:
               $ref: '#/components/schemas/account_holder_status'
             startedAt:
