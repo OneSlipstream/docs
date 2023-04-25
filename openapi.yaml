@@ -1677,8 +1677,7 @@ components:
               $ref: '#/components/schemas/dob'
               description: The applicant's date of birth
             address:
-              allOf:
-                - $ref: '#/components/schemas/schema'
+              $ref: '#/components/schemas/schema'
             reportType:
               type: string
               enum:
@@ -1706,8 +1705,7 @@ components:
             - address
             - reportType
         summary:
-          allOf:
-            - $ref: '#/components/schemas/summary'
+          $ref: '#/components/schemas/summary'
         accounts:
           type: array
           items:
