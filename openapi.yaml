@@ -1651,6 +1651,70 @@ components:
         - holder
         - history
         - details
+    judgement:
+      type: object
+      properties:
+        name:
+          type: string
+          example: john smith
+          description: The lowercase raw name of the consumer from the judgement
+        address:
+          type: string
+          example: 7 new bond street, london, uk
+          description: The lowercase raw address of the consumer from the judgement
+        dob:
+          type: string
+          example: '1980-01-01'
+          description: The raw date of birth of the consumer from the judgement
+        courtName:
+          type: string
+          example: lambeth
+          description: The name of the court where the judgement was issued
+        courtType:
+          type: string
+          example: County Court Judgment
+          description: The type of court where the judgement was issued
+        caseNumber:
+          type: string
+          example: 123456789
+          description: The case number of the judgement
+        status:
+          type: string
+          example: JG
+          description: The current status of the judgement
+        amount:
+          type: number
+          example: 1000
+          description: The amount of the judgement
+      required:
+        - courtName
+        - courtType
+        - caseNumber
+        - status
+        - amount
+    notice-of-correction:
+      type: object
+      properties:
+        reference:
+          type: string
+          example: 123456789
+          description: The reference number of the notice of correction
+        createdAt:
+          type: string
+          example: '2020-01-01'
+          description: The date the notice of correction was raised/created
+        text:
+          type: string
+          example: The judgement was issued in error and has been revoked
+          description: The raw text of the notice of correction
+        name:
+          type: string
+          example: john smith
+          description: The lowercase raw name of the consumer from the notice of correction
+        address:
+          type: string
+          example: 7 new bond street, london, uk
+          description: The lowercase raw address of the consumer from the notice of correction
     search_safe:
       type: object
       properties:
@@ -1708,6 +1772,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/search_account'
+        judgements:
+          type: array
+          items:
+            $ref: '#/components/schemas/judgement'
+        noticesOfCorrection:
+          type: array
+          items:
+            $ref: '#/components/schemas/notice-of-correction'
         scores:
           type: object
           properties:
