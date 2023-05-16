@@ -1408,9 +1408,6 @@ components:
               $ref: '#/components/schemas/dob'
               nullable: true
               description: The account holder's date of birth
-            address:
-              $ref: '#/components/schemas/address_safe'
-              nullable: true
             status:
               $ref: '#/components/schemas/account_holder_status'
             startedAt:
